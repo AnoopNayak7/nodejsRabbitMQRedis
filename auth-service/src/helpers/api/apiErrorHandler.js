@@ -1,8 +1,9 @@
 export const apiErrorHandler = {
-    error400: (res) => {
+    error400: (res, msg, err) => {
         return res.status(400).json({
             success: false,
-            msg: "Please fill in all fields"
+            msg: msg,
+            err: err
         })
     }
 }

@@ -13,17 +13,17 @@ const app = express();
 app.use(express.json())
 app.use(cors())
 
-app.use(`/auth/v1/`, AuthRoutes)
-
-const PORT = process.env.PORT || 7070;
-const URI = process.env.MONGO_URL;
-
-if(app.settings.env === 'development'){
+if (app.settings.env === 'development') {
     globalConfig.mongodb.db = 'auth-db-test'
 }
 
 // MongoDB connection
 const dbConnectionStatus = MongoDBConnection(globalConfig.mongodb)
+
+app.use(`/auth/v1/`, AuthRoutes)
+
+const PORT = process.env.PORT || 7070;
+const URI = process.env.MONGO_URL;
 
 const encryptedText = encryptionHelper.encrypt('AnoopNayak')
 const decryptedText = encryptionHelper.decrypt(encryptedText)
